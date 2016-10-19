@@ -46,12 +46,26 @@ def format_json(factor_name, entry):
         factor_name, entry[factor_name], entry['quarter'], entry['count'])
 
 
+def check_factor_size(factor, lines):
+    """Fail if factor can't be applied to the given lines"""
+    factor_l = len(factor['data'])
+    lines_l = len(lines)
+    if factor_l != lines_l:
+        raise ValueError(
+            'Chosen factor "%s" has %d items, and there are %d lines' %
+            (factor['name'], factor_l, lines_l))
+
+
 def create_data_structure(lines, factor_name):
     """Add chosen factor data to measurements."""
     data = []
     for i, line in enumerate(lines):
         factor_chosen = get_factor_by_name(factor_name)
         factor = factor_chosen['data'][i]
+
+        # make sure factor chosen is adecuate for the input data
+        check_factor_size(factor_chosen, lines)
+
         measures = line.split()
         for j, m in enumerate(measures):
             quarter = quarters[j]
@@ -74,7 +88,7 @@ if sys.stdin.isatty():
 lines = sys.stdin.readlines()
 no_separator = remove_thousands_separator(lines)
 
-factor = 'province'
+factor = 'company_size'
 data = create_data_structure(no_separator, factor)
 fmt = partial(format_csv, factor)
 csv = map(fmt, data)
