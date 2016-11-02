@@ -14,3 +14,7 @@ We'll try to fix that, while keeping the data, the tools and the process open fo
 4. run `cleanup.py` passing in the `.txt` file as standard input (e.g. `> python cleanup.py < ./raw/txt/some.file.txt`).
 5. save the output as a `.csv` file on the [csv](https://github.com/fernandezpablo85/employment-argentina/tree/master/csv) folder.
 6. make sure to pick the appropiate facto by modifying the chosen factor variable on [`cleanup.py`](https://github.com/fernandezpablo85/employment-argentina/blob/master/cleanup.py#L91)
+
+## Inspiration
+
+[NYT recesssion chart](http://www.nytimes.com/interactive/2014/06/05/upshot/how-the-recession-reshaped-the-economy-in-255-charts.html)
